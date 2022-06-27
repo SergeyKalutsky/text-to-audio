@@ -19,8 +19,7 @@ with open('corpus.json', 'r', encoding='utf-8') as f:
 sentenses = [val.strip() for val in chain(*[chunk.split('.') for chunk in text.split('\n')]) if val not in (' ', '')]
 i = 0
 for sentence in tqdm(sentenses):
-    gTTS(text=sentence, lang='en', slow=False).save(f"audio/{i}.mp3")
-    word_tokens = list(set(word_tokenize(sentence.lower())))
+    word_tokens = word_tokenize(sentence.lower())
     word_tokens = [word for word in word_tokens if word not in common_words and len(word) > 1]
     for word in word_tokens:
         if word in corpus:
